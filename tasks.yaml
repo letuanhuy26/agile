@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Dừng script ngay lập tức nếu có bất kỳ lệnh nào bị lỗi
+set -e
+
+# 1. Khởi động và kiểm tra môi trường
+echo "====================================="
+echo "        KIỂM TRA MÔI TRƯỜNG"
+echo "====================================="
+echo "Node version:" && node -v
+echo "NPM version:" && npm -v
+echo "Thư mục hiện tại:" && pwd
+
+# 2. Xóa cache của npm (nếu cần thiết để tránh lỗi cài đặt)
+echo "====================================="
+echo "          CLEANING NPM CACHE"
+echo "====================================="
+npm cache clean --force
+
+# 3. Cài đặt các thư viện (Dependencies)
+echo "====================================="
+echo "          RUNNING NPM INSTALL"
+echo "====================================="
+npm install
+
+# 4. Chạy kiểm thử với Jasmine
+echo "====================================="
+echo "          RUNNING JASMINE TESTS"
+echo "====================================="
+npx jasmine
